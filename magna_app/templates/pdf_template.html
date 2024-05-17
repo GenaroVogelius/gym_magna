@@ -1,0 +1,81 @@
+
+<head>
+<style>
+    @page {
+        size: a4 portrait;
+
+        @frame header_frame {           /* Static Frame */
+            left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+        }
+        @frame logo_frame {           /* Static Frame */
+            -pdf-frame-content: logo_content;
+            left: 465pt; width: 800pt; top: 0pt; height: 120pt;
+        }
+        @frame content_frame {          /* Content Frame */
+            left: 50pt; width: 512pt; top: 90pt; height: 632pt;
+        }
+        @frame footer_frame {           /* Another static Frame */
+            -pdf-frame-content: footer_content;
+            left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+        }
+
+        @frame font-size{           /* Another static Frame */
+            -pdf-frame-content: font-size;
+            font-size: 180pt;
+        }
+    }
+
+</style>
+</head>
+
+<body>
+    <!-- Content for Static Frame 'header_frame' -->
+
+    <div id="header_content">
+    	<h3 style="font-size: 20px;">{{nombre}} {{apellido}}</h3>
+    </div>
+    <div>
+        
+    	<img id="logo_content" src="{{ STATIC_DIR }}/static/logo/logoPower.jpg" alt="Logo">
+    </div>
+
+    <!-- Content for Static Frame 'footer_frame' -->
+    <div id="footer_content">Página <pdf:pagenumber>
+        de <pdf:pagecount>
+    </div>
+
+    <!-- HTML Content -->
+
+    {% for rutina in sesiones_and_form_de_rutinas %}
+    {% for key, value in rutina.items %}
+    <p style="font-size: 20px; text-decoration: underline;"><strong>Sesion {{key}} </strong></p>
+
+    <table>
+          <thead >
+            <tr style="padding-top: 0.2rem; font-size: 20px; ">
+              <th className="font-size">Ejercicio</th>
+              <th className="text-center h4">Series</th>
+              <th className="text-center h4">Repeticiones</th>
+            </tr>
+          </thead>
+          <thead>
+            {% for detalles in value %}
+    <tr style="font-size: 17px; display: grid; place-items: center; align-items: end;">
+        <th style="font-weight: normal;">{{detalles.detalles_de_ejercicio.ejercicio}}</th>
+        <th style="font-weight: normal;">{{detalles.repeticiones}}</th>
+        <th style="font-weight: normal;">{{detalles.series}}</th>
+    </tr>
+        {% endfor %}
+        </table>
+        <hr>
+            {% endfor %}
+{% endfor %}
+
+          
+
+
+
+
+
+</body>
+</html>
