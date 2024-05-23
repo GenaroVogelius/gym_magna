@@ -6,9 +6,11 @@ indexDatesMissing.forEach(dateIndex => {
  })
 
 if (daysList.length !== 7) {
-  daysList.unshift("Feriado");
+  daysList.unshift("Dia no laboral");
 };
  
+
+
 
 
 let isSaturday = 0;
@@ -77,23 +79,23 @@ HORARIOS = [
 
 const allValuesLists = [];
 
-daysList.forEach(day => {
-  values_list = []
-  HORARIOS.forEach(horario => {
-        try {
-      let cantidadPersonas = llegadasData[day].time_counts[horario];
-      if (cantidadPersonas === undefined) {
-        values_list.push(0);
-      } else {
-        values_list.push(cantidadPersonas);
-      }
-    } catch (error) {
-      values_list.push(0); // Handle the error by pushing 0 to the list
-    }
-  });
+// daysList.forEach(day => {
+//   values_list = []
+//   HORARIOS.forEach(horario => {
+//         try {
+//       let cantidadPersonas = llegadasData[day].time_counts[horario];
+//       if (cantidadPersonas === undefined) {
+//         values_list.push(0);
+//       } else {
+//         values_list.push(cantidadPersonas);
+//       }
+//     } catch (error) {
+//       values_list.push(0); // Handle the error by pushing 0 to the list
+//     }
+//   });
 
-  allValuesLists.push(values_list);
-});
+//   allValuesLists.push(values_list);
+// });
 
 
 const ctx1 = document.getElementById('myChart1')
@@ -106,9 +108,11 @@ const ctx5 = document.getElementById('myChart5')
     const LABELSIZE = 15
 
     const colorBackground = [
+      "rgba(75, 192, 192, 0.2)",
       "rgba(255, 99, 132, 0.2)",
       "rgba(255, 205, 86, 0.2)",
-      "rgba(75, 192, 192, 0.2)",
+      
+      
       "rgba(54, 162, 235, 0.2)",
       "rgba(153, 102, 255, 0.2)",
       "rgba(255, 159, 64, 0.2)",
@@ -120,9 +124,9 @@ const ctx5 = document.getElementById('myChart5')
     ];
 
 const colorBorder = [
+  "rgb(75, 192, 192)",
   "rgb(255, 99, 132)",
   "rgb(255, 205, 86)",
-  "rgb(75, 192, 192)",
   "rgb(54, 162, 235)",
   "rgb(153, 102, 255)",
   "rgb(255, 159, 64)",
@@ -136,93 +140,142 @@ const colorBorder = [
 
 
 
-  const AsistenciaDia7 = allValuesLists[0]
-  const AsistenciaDia6 = allValuesLists[1]
-  const AsistenciaDia5 = allValuesLists[2]
-  const AsistenciaDia4 = allValuesLists[3]
-  const AsistenciaDia3 = allValuesLists[4]
-  const AsistenciaDia2 = allValuesLists[5]
-  const AsistenciaDia1 = allValuesLists[6]
-  const AsistenciaDia0 = allValuesLists[7]
+  // const AsistenciaDia7 = allValuesLists[0]
+  // const AsistenciaDia6 = allValuesLists[1]
+  // const AsistenciaDia5 = allValuesLists[2]
+  // const AsistenciaDia4 = allValuesLists[3]
+  // const AsistenciaDia3 = allValuesLists[4]
+  // const AsistenciaDia2 = allValuesLists[5]
+  // const AsistenciaDia1 = allValuesLists[6]
+  // const AsistenciaDia0 = allValuesLists[7]
   
-const generoData = [sexoCount.Masculino, sexoCount.Femenino];
+const generoData = [sexoCount.M, sexoCount.F];
 const membersData = [activeNonActiveMembers.True, activeNonActiveMembers.False];
 
-let configLineChartWeek = {
-  type: "line",
+
+// let configLineChartWeek = {
+//   type: "line",
+//   data: {
+//     labels: HORARIOS,
+//     datasets: [
+//       {
+//         label: getDates(6),
+//         backgroundColor: colorBackground[0],
+//         borderColor: colorBorder[0],
+//         data: AsistenciaDia7,
+//         fill: true,
+//       },
+//       {
+//         label: getDates(5),
+//         fill: true,
+//         backgroundColor: colorBackground[1],
+//         borderColor: colorBorder[1],
+//         data: AsistenciaDia6,
+//       },
+//       {
+//         label: getDates(4),
+//         fill: true,
+//         backgroundColor: colorBackground[2],
+//         borderColor: colorBorder[2],
+//         data: AsistenciaDia5,
+//       },
+//       {
+//         label: getDates(3),
+//         fill: true,
+//         backgroundColor: colorBackground[3],
+//         borderColor: colorBorder[3],
+//         data: AsistenciaDia4,
+//       },
+//       {
+//         label: getDates(2),
+//         fill: true,
+//         backgroundColor: colorBackground[4],
+//         borderColor: colorBorder[4],
+//         data: AsistenciaDia3,
+//       },
+//       {
+//         label: getDates(1),
+//         fill: true,
+//         backgroundColor: colorBackground[5],
+//         borderColor: colorBorder[5],
+//         data: AsistenciaDia2,
+//       },
+//       {
+//         label: "Hoy",
+//         fill: true,
+//         backgroundColor: colorBackground[6],
+//         borderColor: colorBorder[6],
+//         data: AsistenciaDia1,
+//       },
+//     ],
+//   },
+//   options: {
+//     plugins: {
+//       legend: {
+//         position: "top",
+//         labels: {
+//           font: {
+//             size: LABELSIZE,
+//           },
+//         },
+//         onHover: function () {
+//           ctx1.style.cursor = "pointer";
+//         },
+//         onLeave: function () {
+//           ctx1.style.cursor = "default";
+//         },
+//       },
+//       title: {
+//         display: true,
+//         text: "Asistencias por día en horarios",
+//         font: {
+//           size: TITLESIZE,
+//         },
+//       },
+//     },
+
+//     responsive: true,
+//     tooltips: {
+//       mode: "index",
+//       intersect: false,
+//     },
+//     hover: {
+//       mode: "nearest",
+//       intersect: true,
+//     },
+
+//     scales: {
+//       y: {
+//         ticks: {
+//           stepSize: 1, // Display only integer values
+//         },
+//       },
+//     },
+//   },
+// };
+
+
+let configBarChartCollectedMonth = {
+  type: "bar",
   data: {
-    labels: HORARIOS,
+    labels: collectedMonthly.map(entry => entry.month),
     datasets: [
       {
-        label: getDates(6),
-        backgroundColor: colorBackground[0],
-        borderColor: colorBorder[0],
-        data: AsistenciaDia7,
-        fill: true,
-      },
-      {
-        label: getDates(5),
-        fill: true,
-        backgroundColor: colorBackground[1],
-        borderColor: colorBorder[1],
-        data: AsistenciaDia6,
-      },
-      {
-        label: getDates(4),
-        fill: true,
-        backgroundColor: colorBackground[2],
-        borderColor: colorBorder[2],
-        data: AsistenciaDia5,
-      },
-      {
-        label: getDates(3),
-        fill: true,
-        backgroundColor: colorBackground[3],
-        borderColor: colorBorder[3],
-        data: AsistenciaDia4,
-      },
-      {
-        label: getDates(2),
-        fill: true,
-        backgroundColor: colorBackground[4],
-        borderColor: colorBorder[4],
-        data: AsistenciaDia3,
-      },
-      {
-        label: getDates(1),
-        fill: true,
-        backgroundColor: colorBackground[5],
-        borderColor: colorBorder[5],
-        data: AsistenciaDia2,
-      },
-      {
-        label: "Hoy",
-        fill: true,
-        backgroundColor: colorBackground[6],
-        borderColor: colorBorder[6],
-        data: AsistenciaDia1,
+        data: collectedMonthly.map(entry => entry.total_collected),
+        backgroundColor: colorBackground,
+        borderColor: colorBorder,
+        borderWidth: 2,
       },
     ],
   },
   options: {
     plugins: {
       legend: {
-        position: "top",
-        labels: {
-          font: {
-            size: LABELSIZE,
-          },
-        },
-        onHover: function () {
-          ctx1.style.cursor = "pointer";
-        },
-        onLeave: function () {
-          ctx1.style.cursor = "default";
-        },
+        display: false,
       },
       title: {
         display: true,
-        text: "Asistencias por día en horarios",
+        text: "Recaudado Por Mes",
         font: {
           size: TITLESIZE,
         },
@@ -238,7 +291,6 @@ let configLineChartWeek = {
       mode: "nearest",
       intersect: true,
     },
-
     scales: {
       y: {
         ticks: {
@@ -248,7 +300,6 @@ let configLineChartWeek = {
     },
   },
 };
-
 
 let configPieChartSex = {
     type: "pie",
@@ -276,7 +327,7 @@ let configPieChartSex = {
         },
         title: {
           display: true,
-          text: "Asistencia por género en los últimos 3 meses",
+          text: "Asistencia por género",
           font: {
             size: TITLESIZE,
           },
@@ -296,15 +347,15 @@ let configPieChartSex = {
     },
 }
   
+
+let a = collectedMonthly.map(entry => entry)
 let configBarChartMonths = {
   type: "bar",
   data: {
-    labels: Object.keys(asistenciasPerMonth),
+    labels: usersPaidMonthly.map(entry => entry.month),
     datasets: [
       {
-        data: Object.keys(asistenciasPerMonth).map(
-          (month) => asistenciasPerMonth[month]
-        ),
+        data: usersPaidMonthly.map(entry => entry.user_count),
         backgroundColor: colorBackground,
         borderColor: colorBorder,
         borderWidth: 2,
@@ -318,7 +369,7 @@ let configBarChartMonths = {
       },
       title: {
         display: true,
-        text: "Asistencias por mes",
+        text: "Cantidad De Personas Que Abonaron Por Mes",
         font: {
           size: TITLESIZE,
         },
@@ -398,8 +449,8 @@ let configPieChartMembers = {
     datasets: [
       {
         data: membersData,
-        backgroundColor: colorBackground,
-        borderColor: colorBorder,
+        backgroundColor: ['rgba(0, 128, 0, 0.2)', 'rgba(255, 0, 0, 0.2)'], // Green background
+        borderColor: ['rgba(0, 128, 0, 1)','rgba(255, 0, 0, 1)'], // Red border']
         borderWidth: 2,
       },
     ],
@@ -418,7 +469,7 @@ let configPieChartMembers = {
       },
       title: {
         display: true,
-        text: "Socios activos y no activos en los últimos 3 meses",
+        text: "Socios activos y no activos",
         font: {
           size: TITLESIZE,
         },
@@ -438,7 +489,8 @@ let configPieChartMembers = {
   },
 };
 
-new Chart(ctx1, configLineChartWeek)
+// new Chart(ctx1, configLineChartWeek)
+new Chart(ctx1, configBarChartCollectedMonth)
 new Chart(ctx2, configBarChartMonths)
 new Chart(ctx3, configBarPerDay);
 new Chart(ctx4, configPieChartSex);

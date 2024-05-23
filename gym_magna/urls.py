@@ -18,12 +18,12 @@ Including another URLconf
 from django.urls import include, path
 from magna_app.admin import magna_site
 
+
 urlpatterns = [
-    path("adm/", include("magna_app.urls")),
-    path("", magna_site.urls),
-    # path("admin/", admin.site.urls),
+    path("admin/", magna_site.urls),
     
 
+    path("", include("magna_app.urls")),
 
 ]
 

@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'magna_app',
     'rest_framework',# !agregaste esto
     "corsheaders",# !agregaste esto
-    "django_crontab",# !agregaste esto
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -64,7 +63,7 @@ ROOT_URLCONF = 'gym_magna.urls'
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'front-end-power/dist'), os.path.join(BASE_DIR, 'magna_app/templates/')],
+        "DIRS": [os.path.join(BASE_DIR, 'front-end/dist'), os.path.join(BASE_DIR, 'magna_app/templates/')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -141,7 +140,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'front-end-power/dist/assets'),  os.path.join(BASE_DIR, 'magna_app/static')
+    os.path.join(BASE_DIR, 'front-end/dist/assets'),  os.path.join(BASE_DIR, 'magna_app/static')
 ]
 
 STATIC_URL = "/assets/"

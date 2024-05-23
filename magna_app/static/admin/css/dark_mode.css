@@ -1,6 +1,6 @@
 @media (prefers-color-scheme: dark) {
     :root {
-      --primary: #264b5d;
+      --primary: #006000;
       --primary-fg: #f7f7f7;
   
       --body-fg: #eeeeee;
@@ -11,7 +11,7 @@
       --breadcrumbs-link-fg: #e0e0e0;
       --breadcrumbs-bg: var(--primary);
   
-      --link-fg: #81d4fa;
+      --link-fg: #28ff00;
       --link-hover-color: #4ac1f7;
       --link-selected-fg: #6f94c6;
   
@@ -33,7 +33,7 @@
   }
 
 html[data-theme="dark"] {
-    --primary: linear-gradient(0deg, rgb(137 62 3) 0%, rgb(179 47 2) 100%);
+    --primary: #006000;
     --primary-fg: #f7f7f7;
 
     --body-fg: #eeeeee;
@@ -44,7 +44,7 @@ html[data-theme="dark"] {
     --breadcrumbs-link-fg: #e0e0e0;
     --breadcrumbs-bg: var(--primary);
 
-    --link-fg: #ffb102;
+    --link-fg: #28ff00;
     --link-hover-color: #4ac1f7;
     --link-selected-fg: #6f94c6;
 
@@ -58,7 +58,7 @@ html[data-theme="dark"] {
 
     --darkened-bg: #212121;
     --selected-bg: #1b1b1b;
-    --selected-row: linear-gradient(0deg, rgb(103 54 0) 0%, rgb(214 85 6) 100%);;
+    --selected-row: linear-gradient(0deg, rgb(13 103 0) 0%, rgb(21 214 6) 100%);
 
     --close-button-bg: #333333;
     --close-button-hover-bg: #666666;

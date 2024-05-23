@@ -18,8 +18,9 @@ from .views import *
 
 class MagnaAdminArea(admin.AdminSite):
     site_header = "Magna Administración"
-    site_url = "adm/entrada"
+    site_url = "/entrada"
     index_title = "Administración de Magna Gym"
+    site_header = 'Magna gym administración'
 
 
 magna_site = MagnaAdminArea(name="magnaAdmin")
@@ -108,13 +109,16 @@ class AsistenciaAdmin(admin.ModelAdmin):
     ordering = ("-dia",)
 
 
+
 class TipoPlanAdmin(admin.ModelAdmin):
     list_display = ("nombre", "precio", "vigencia")
     ordering = ("-precio",)
-
+class PreciosHistoricoAdmin(admin.ModelAdmin):
+    pass
 
 
 
 magna_site.register(Usuario, UsuarioAdmin)
 magna_site.register(Asistencia, AsistenciaAdmin)
 magna_site.register(TipoPlan, TipoPlanAdmin)
+magna_site.register(PreciosHistorico, PreciosHistoricoAdmin)
