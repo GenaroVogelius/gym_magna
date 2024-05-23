@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'gym_magna.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-if DEBUG:
+if not DEBUG:
     DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -94,12 +94,12 @@ if DEBUG:
 else:
     DATABASES = {
     'default': {
-        'ENGINE': "django.db.backends.postgresql_psycopg2",
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD':  'postgres',
+        'HOST':  'db',
+        'PORT':  5432,
     }
 }
 

@@ -6,3 +6,7 @@ venv
 magna_app/__pycache__
 magna_app/migrations
 __pycache__
+__pycache__/
+
+# Ignore compiled Python files
+*.pyc
