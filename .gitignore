@@ -4,7 +4,6 @@ node_modules
 front-end/package-lock.json
 venv
 magna_app/__pycache__
-magna_app/migrations
 __pycache__
 __pycache__/
 gym_magna/data
