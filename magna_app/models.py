@@ -9,10 +9,20 @@ from django.db.models.functions import TruncMonth
 
 class PreciosHistorico(models.Model):
     # solo es creado cuando se modifica en usuario la fecha de pago, y cuando se modifica en tipoPlan el precio
-    usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
+    # usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
+    usuario_nombre = models.CharField(max_length=50)
     nombre_plan = models.CharField(max_length=50)
     precio_plan = models.PositiveIntegerField()
     fecha_de_pago = models.DateField(default=timezone.now, null=False, blank=False)
+
+
+    class Meta:
+        verbose_name = "Abono" 
+        verbose_name_plural = "Abonos realizados"
+
+
+    def __str__(self) -> str:
+        return f"{self.usuario_nombre} pagó ${self.precio_plan} el {self.fecha_de_pago}"
 
 
 
@@ -152,7 +162,7 @@ class Usuario(models.Model):
 
     def save_tipo_plan_history(self):
         PreciosHistorico.objects.create(
-            usuario=self,
+            usuario_nombre=self.nombre,
             nombre_plan=self.tipo_de_plan.nombre,
             precio_plan = self.tipo_de_plan.precio,
             fecha_de_pago = self.fecha_de_pago,

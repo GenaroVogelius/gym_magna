@@ -1,8 +1,9 @@
 
 
+
 // ?argument 0 indicates that no elements should be removed during the insertion;
 indexDatesMissing.forEach(dateIndex => { 
-  daysList.splice(dateIndex-1, 0, "Feriado");
+  daysList.splice(dateIndex-1, 0, "Dia no laboral");
  })
 
 if (daysList.length !== 7) {
@@ -29,13 +30,13 @@ function getDates(numb) {
   //  }
   //   console.log(currentDateToModify);
 
-    // ? si la fecha modificada incluye sabado y issabado es mayor que 2 y la fecha corriente no es sabado
-    if (currentDateToModify.toString().includes("Sat") || isSaturday >= 2 && !currentDate.toString().includes("Sat"))  {
-      isSaturday += 1;
-      if (isSaturday >= 2) {
-        currentDateToModify.setDate(currentDateNumber - numb + 1);
-      }
-    }
+    // // ? si la fecha modificada incluye sabado y issabado es mayor que 2 y la fecha corriente no es sabado
+    // if (currentDateToModify.toString().includes("Sat") || isSaturday >= 2 && !currentDate.toString().includes("Sat"))  {
+    //   isSaturday += 1;
+    //   if (isSaturday >= 2) {
+    //     currentDateToModify.setDate(currentDateNumber - numb + 1);
+    //   }
+    // }
   let formattedDate = currentDateToModify.toLocaleDateString("es-ES", options);
 
     return formattedDate;
@@ -77,32 +78,13 @@ HORARIOS = [
       "21:00",
     ];
 
-const allValuesLists = [];
-
-// daysList.forEach(day => {
-//   values_list = []
-//   HORARIOS.forEach(horario => {
-//         try {
-//       let cantidadPersonas = llegadasData[day].time_counts[horario];
-//       if (cantidadPersonas === undefined) {
-//         values_list.push(0);
-//       } else {
-//         values_list.push(cantidadPersonas);
-//       }
-//     } catch (error) {
-//       values_list.push(0); // Handle the error by pushing 0 to the list
-//     }
-//   });
-
-//   allValuesLists.push(values_list);
-// });
-
 
 const ctx1 = document.getElementById('myChart1')
 const ctx2 = document.getElementById("myChart2");
 const ctx3 = document.getElementById('myChart3')
 const ctx4 = document.getElementById('myChart4')
 const ctx5 = document.getElementById('myChart5')
+const ctx6 = document.getElementById('myChart6')
 
     const TITLESIZE = 20
     const LABELSIZE = 15
@@ -138,121 +120,146 @@ const colorBorder = [
 ];
 
 
+const allValuesLists = [];
 
+daysList.forEach(day => {
+  values_list = []
+  HORARIOS.forEach(horario => {
+        try {
+      let cantidadPersonas = llegadasData[day].time_counts[horario];
+      if (cantidadPersonas === undefined) {
+        values_list.push(0);
+      } else {
+        values_list.push(cantidadPersonas);
+      }
+    } catch (error) {
+      values_list.push(0); // Handle the error by pushing 0 to the list
+    }
+  });
 
-  // const AsistenciaDia7 = allValuesLists[0]
-  // const AsistenciaDia6 = allValuesLists[1]
-  // const AsistenciaDia5 = allValuesLists[2]
-  // const AsistenciaDia4 = allValuesLists[3]
-  // const AsistenciaDia3 = allValuesLists[4]
-  // const AsistenciaDia2 = allValuesLists[5]
-  // const AsistenciaDia1 = allValuesLists[6]
-  // const AsistenciaDia0 = allValuesLists[7]
-  
-const generoData = [sexoCount.M, sexoCount.F];
-const membersData = [activeNonActiveMembers.True, activeNonActiveMembers.False];
+  allValuesLists.push(values_list);
+});
 
+const AsistenciaDia7 = allValuesLists[0]
+const AsistenciaDia6 = allValuesLists[1]
+const AsistenciaDia5 = allValuesLists[2]
+const AsistenciaDia4 = allValuesLists[3]
+const AsistenciaDia3 = allValuesLists[4]
+const AsistenciaDia2 = allValuesLists[5]
+const AsistenciaDia1 = allValuesLists[6]
+const AsistenciaDia0 = allValuesLists[7]
 
-// let configLineChartWeek = {
-//   type: "line",
-//   data: {
-//     labels: HORARIOS,
-//     datasets: [
-//       {
-//         label: getDates(6),
-//         backgroundColor: colorBackground[0],
-//         borderColor: colorBorder[0],
-//         data: AsistenciaDia7,
-//         fill: true,
-//       },
-//       {
-//         label: getDates(5),
-//         fill: true,
-//         backgroundColor: colorBackground[1],
-//         borderColor: colorBorder[1],
-//         data: AsistenciaDia6,
-//       },
-//       {
-//         label: getDates(4),
-//         fill: true,
-//         backgroundColor: colorBackground[2],
-//         borderColor: colorBorder[2],
-//         data: AsistenciaDia5,
-//       },
-//       {
-//         label: getDates(3),
-//         fill: true,
-//         backgroundColor: colorBackground[3],
-//         borderColor: colorBorder[3],
-//         data: AsistenciaDia4,
-//       },
-//       {
-//         label: getDates(2),
-//         fill: true,
-//         backgroundColor: colorBackground[4],
-//         borderColor: colorBorder[4],
-//         data: AsistenciaDia3,
-//       },
-//       {
-//         label: getDates(1),
-//         fill: true,
-//         backgroundColor: colorBackground[5],
-//         borderColor: colorBorder[5],
-//         data: AsistenciaDia2,
-//       },
-//       {
-//         label: "Hoy",
-//         fill: true,
-//         backgroundColor: colorBackground[6],
-//         borderColor: colorBorder[6],
-//         data: AsistenciaDia1,
-//       },
-//     ],
-//   },
-//   options: {
-//     plugins: {
-//       legend: {
-//         position: "top",
-//         labels: {
-//           font: {
-//             size: LABELSIZE,
-//           },
-//         },
-//         onHover: function () {
-//           ctx1.style.cursor = "pointer";
-//         },
-//         onLeave: function () {
-//           ctx1.style.cursor = "default";
-//         },
-//       },
-//       title: {
-//         display: true,
-//         text: "Asistencias por día en horarios",
-//         font: {
-//           size: TITLESIZE,
-//         },
-//       },
-//     },
+console.log(allValuesLists)
+console.log(AsistenciaDia2)
+console.log(AsistenciaDia3)
 
-//     responsive: true,
-//     tooltips: {
-//       mode: "index",
-//       intersect: false,
-//     },
-//     hover: {
-//       mode: "nearest",
-//       intersect: true,
-//     },
+let configLineChartWeek = {
+  type: "line",
+  data: {
+    labels: HORARIOS,
+    datasets: [
+      {
+        label: getDates(7),
+        backgroundColor: colorBackground[7],
+        borderColor: colorBorder[7],
+        data: AsistenciaDia7,
+        fill: true,
+      },
+      {
+        label: getDates(6),
+        backgroundColor: colorBackground[0],
+        borderColor: colorBorder[0],
+        data: AsistenciaDia6,
+        fill: true,
+      },
+      {
+        label: getDates(5),
+        fill: true,
+        backgroundColor: colorBackground[1],
+        borderColor: colorBorder[1],
+        data: AsistenciaDia5,
+      },
+      {
+        label: getDates(4),
+        fill: true,
+        backgroundColor: colorBackground[2],
+        borderColor: colorBorder[2],
+        data: AsistenciaDia4,
+      },
+      {
+        label: getDates(3),
+        fill: true,
+        backgroundColor: colorBackground[3],
+        borderColor: colorBorder[3],
+        data: AsistenciaDia3,
+      },
+      {
+        label: getDates(2),
+        fill: true,
+        backgroundColor: colorBackground[4],
+        borderColor: colorBorder[4],
+        data: AsistenciaDia2,
+      },
+      {
+        label: getDates(1),
+        fill: true,
+        backgroundColor: colorBackground[5],
+        borderColor: colorBorder[5],
+        data: AsistenciaDia1,
+      },
+      {
+        label: getDates(0),
+        fill: true,
+        backgroundColor: colorBackground[6],
+        borderColor: colorBorder[6],
+        data: AsistenciaDia0,
+      },
+    ],
+  },
+  options: {
+    plugins: {
+      legend: {
+        position: "top",
+        labels: {
+          font: {
+            size: LABELSIZE,
+          },
+        },
+        onHover: function () {
+          ctx1.style.cursor = "pointer";
+        },
+        onLeave: function () {
+          ctx1.style.cursor = "default";
+        },
+      },
+      title: {
+        display: true,
+        text: "Asistencias por día en horarios",
+        font: {
+          size: TITLESIZE,
+        },
+      },
+    },
 
-//     scales: {
-//       y: {
-//         ticks: {
-//           stepSize: 1, // Display only integer values
-//         },
-//       },
-//     },
-//   },
-// };
+    responsive: true,
+    tooltips: {
+      mode: "index",
+      intersect: false,
+    },
+    hover: {
+      mode: "nearest",
+      intersect: true,
+    },
+
+    scales: {
+      y: {
+        ticks: {
+          stepSize: 1, // Display only integer values
+        },
+      },
+    },
+  },
+};
 
 
 let configBarChartCollectedMonth = {
@@ -301,6 +308,12 @@ let configBarChartCollectedMonth = {
   },
 };
 
+
+
+const generoData = [sexoCount.M, sexoCount.F];
+const membersData = [activeNonActiveMembers.True, activeNonActiveMembers.False];
+
+
 let configPieChartSex = {
     type: "pie",
     data: {
@@ -348,7 +361,9 @@ let configPieChartSex = {
 }
   
 
-let a = collectedMonthly.map(entry => entry)
+console.log(usersPaidMonthly)
+
+
 let configBarChartMonths = {
   type: "bar",
   data: {
@@ -495,3 +510,4 @@ new Chart(ctx2, configBarChartMonths)
 new Chart(ctx3, configBarPerDay);
 new Chart(ctx4, configPieChartSex);
 new Chart(ctx5, configPieChartMembers);
+new Chart(ctx6, configLineChartWeek);

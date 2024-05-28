@@ -19,7 +19,7 @@ from .utils import GraphicsDataGenerator
 
 
 @api_view(["GET", "POST"])
-def admin_usuario(request, dni):
+def admin_usuario(request, dni):    
     if request.method == "GET":
         try:
             usuario = Usuario.objects.get(DNI=dni)

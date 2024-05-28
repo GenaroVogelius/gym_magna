@@ -59,7 +59,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'gym_magna.urls'
 
-
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -83,7 +82,7 @@ WSGI_APPLICATION = 'gym_magna.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-if not DEBUG:
+if not os.environ.get('PROD'):
     DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -97,7 +96,7 @@ else:
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD':  'postgres',
+        'PASSWORD': 'postgres',
         'HOST':  'db',
         'PORT':  5432,
     }
@@ -154,10 +153,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True 
     ALLOWED_HOSTS = ["*"]
-    CSRF_TRUSTED_ORIGINS = ['http://localhost:5173']
-    CSRF_COOKIE_SECURE = True  # Set to True in production with HTTPS
-    CSRF_COOKIE_HTTPONLY = False
-    CSRF_USE_SESSIONS = False
+    # CSRF_TRUSTED_ORIGINS = ['http://0.0.0.0:8000/']
+    # CSRF_COOKIE_SECURE = True  # Set to True in production with HTTPS
+    # CSRF_COOKIE_HTTPONLY = False
+    # CSRF_USE_SESSIONS = False
 
 if not DEBUG:
     CORS_ALLOWED_ORIGINS = [os.environ.get('HTTPS')]

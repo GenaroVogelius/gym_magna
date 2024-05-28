@@ -2,13 +2,15 @@ version: '3.8'
 
 services:
   app:
-    build: .
     volumes:
       - .:/app
+    build: .
     ports:
       - 8000:8000
-    container_name: django_container
+    container_name: django_container_develop
     command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      PROD: True
     depends_on:
       - db
 
@@ -20,4 +22,4 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    container_name: postgres_db
+    container_name: postgres_db_develop

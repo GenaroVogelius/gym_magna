@@ -8,6 +8,7 @@ magna_app/migrations
 __pycache__
 __pycache__/
 gym_magna/data
-
+vite*
+data
 # Ignore compiled Python files
 *.pyc

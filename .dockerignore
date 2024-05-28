@@ -1,0 +1,33 @@
+__pycache__
+*.pyc
+db.sqlite3
+*/src*
+front-end/index.html
+front-end/node_modules
+front-end/src
+front-end/package.json
+front-end/package-lock.json
+magna_app/migrations
+*/vite*
+data
+*.pyc
+db
+# ver si asi funca con *
+# no funco
+# *node_modules
+# *package.json
+# */*/package.json*
+logs
+*.log
+.env
+tmp
+temp
+package.json
+package-lock.json
+Dockerfile
+docker-compose.yml
+.dockerignore
+.git
+.gitignore
+.DS_Store
+venv

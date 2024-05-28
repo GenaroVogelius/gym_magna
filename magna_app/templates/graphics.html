@@ -30,12 +30,15 @@
     <div class="card mb-5">
         <canvas id="myChart3"></canvas>
     </div>
+    <div class="card mb-5">
+        <canvas id="myChart6"></canvas>
+    </div>
       <div class="row mb-4 ">
         <div class="card col-md-6" style="height: 500px;">
         <canvas id="myChart4"></canvas>
         </div>
         <div class="card col-md-6" style="height: 500px;">
-        <canvas id="myChart5"></canvas>
+            <canvas id="myChart5"></canvas>
          </div>
       </div>
 
@@ -49,12 +52,11 @@
     let indexDatesMissing = data.missing_dates_index
     let usersPaidMonthly = data.users_paid_monthly
     let collectedMonthly = data.collected_per_month_dict
-
     let sexoCount = data.sexo_counts_dict
     let total_arrivals_per_day = data.daily_total_arrivals_dict
     let daysList= Object.keys(total_arrivals_per_day);
-
     let activeNonActiveMembers = data.active_and_no_active_members_dict
+    let llegadasData = data.attendance_per_day_and_time
 </script> 
 <script src="{% static 'charts.js' %}"></script>
 

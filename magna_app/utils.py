@@ -131,7 +131,6 @@ class GraphicsDataGenerator:
 
         asistencias_df['time_slice'] = asistencias_df['hora'].apply(categorize_time)
         time_slice_counts_per_day_df = asistencias_df.groupby(['dia', 'time_slice']).size().reset_index(name='persons_arrive_per_time')
-
         #? es para cambiar el formato de año-mes-dia a dia/mes
 
         time_slice_counts_per_day_df['dia'] = time_slice_counts_per_day_df['dia'].apply(self.change_date_order)
@@ -149,7 +148,6 @@ class GraphicsDataGenerator:
         
 
         daily_total_arrivals_df = time_slice_counts_per_day_df.groupby('dia')['persons_arrive_per_time'].sum()
-
 
         # esto es para que te quede el dia de hoy al final del dataframe
         daily_total_arrivals_df = daily_total_arrivals_df.loc[time_slice_counts_per_day_df['dia'].unique()]
@@ -285,9 +283,10 @@ class GraphicsDataGenerator:
 
     def get_users_paid_monthly(self, monthly_df):
         users_paid_monthly = monthly_df[['month', 'user_count']].copy()
-        users_paid_monthly['month'] = self.format_month(users_paid_monthly, 'month')
-        
-        return users_paid_monthly.to_dict(orient="records")
+        users_paid_monthly['month']= self.format_month(users_paid_monthly , 'month')
+        users_paid_monthly = users_paid_monthly.groupby('month')['user_count'].count().reset_index()
+        # ? aca clave el reset index, que convierte la serie en un dataframe y resetea el indice
+        return users_paid_monthly.to_dict(orient='records')
 
 
 
@@ -312,10 +311,7 @@ class GraphicsDataGenerator:
 
 
 
-
         daily_total_arrivals_dict = self.process_daily_total_arrivals(time_slice_counts_per_day_df)
-
-
 
 
         users_df = self.get_users_df()
@@ -323,6 +319,7 @@ class GraphicsDataGenerator:
 
         active_and_no_active_members_dict = self.get_members_active_counts(users_df)
 
+        attendance_per_day_and_time = self.process_attendance_per_day_and_time(time_slice_counts_per_day_df)
 
         return {
             "users_paid_monthly": users_paid_monthly,
@@ -331,4 +328,5 @@ class GraphicsDataGenerator:
             "missing_dates_index":missing_dates_index,
             "collected_per_month_dict":collected_per_month_dict,
             "active_and_no_active_members_dict": active_and_no_active_members_dict,
+            "attendance_per_day_and_time" : attendance_per_day_and_time,
         }
