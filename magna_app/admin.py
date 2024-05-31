@@ -87,8 +87,6 @@ class UsuarioAdmin(admin.ModelAdmin):
         last_execution_date = cache.get(cache_key)
         current_date = timezone.now().date()
 
-        print(current_date)
-        print(last_execution_date)
 
         if last_execution_date is None or last_execution_date != current_date:
             cache_timeout = 60 * 60 * 24  # 24 horas
