@@ -92,7 +92,6 @@ class UsuarioAdmin(admin.ModelAdmin):
 
         if last_execution_date is None or last_execution_date != current_date:
             cache_timeout = 60 * 60 * 24  # 24 horas
-            print("entra")
             queryset = self.get_queryset(request)
             for obj in queryset:
                 self.update_activo(obj)
