@@ -81,15 +81,23 @@ class UsuarioAdmin(admin.ModelAdmin):
 
     # the changelist_view method checks the last execution date stored in the cache (update_activo_last_execution_date). If it is different from the current date, the update_activo function is called for each object in the queryset, and the activo field is updated accordingly. After the execution, the current date is stored in the cache as the last execution date.
     def changelist_view(self, request, extra_context=None):
-        last_execution_date = cache.get("update_activo_last_execution_date")
+        cache_key = "update_activo_last_execution_date"
+        
+
+        last_execution_date = cache.get(cache_key)
         current_date = timezone.now().date()
 
-        if last_execution_date != current_date:
+        print(current_date)
+        print(last_execution_date)
+
+        if last_execution_date is None or last_execution_date != current_date:
+            cache_timeout = 60 * 60 * 24  # 24 horas
+            print("entra")
             queryset = self.get_queryset(request)
             for obj in queryset:
                 self.update_activo(obj)
 
-            cache.set("update_activo_last_execution_date", current_date)
+            cache.set(cache_key, current_date, cache_timeout)
 
         return super().changelist_view(request, extra_context=extra_context)
 
